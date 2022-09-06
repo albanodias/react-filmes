@@ -4,9 +4,10 @@ import './style.css'
 function Header() {
 
   return (
-   
-    <h2>Roberto Albano</h2>
-
+     <header>
+     <Link className="logo" to='/'>Prime Flix</Link>
+     <Link className="favoritos" to='/'>Meus Filmes</Link>
+      </header>
   );
 }
 
