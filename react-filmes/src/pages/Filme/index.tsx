@@ -5,6 +5,7 @@ import './style.css'
 
 
 type filme = {
+  id: string,
   title: string,
   overview: string,
   vote_average: string,
@@ -17,7 +18,8 @@ function Filme(){
 
   const[loading, setLoading] = useState(true); 
   const[filme, setFilme] = useState<filme>({
-     title: "",
+      id:"",
+      title: "",
       overview: "",
       vote_average: "",
       backdrop_path: "",
@@ -52,6 +54,27 @@ function Filme(){
 
   }, [navigate,id])
 
+
+  function salvarFilme() {
+    const minhaLista = localStorage.getItem("@primeflix");
+
+    let filmesSalvos = minhaLista !== null ? JSON.parse(minhaLista) : [];
+
+    const hasFilme = filmesSalvos.some((filmeSalvo: any) => filmeSalvo.id === filme.id)
+
+    if(hasFilme){
+      alert("Esse filme ja esta na lista");
+      return;
+    }
+
+    filmesSalvos.push(filme);
+    localStorage.setItem("@primeflix", JSON.stringify(filmesSalvos));
+    alert("Filme salco com sucesso");
+
+  }
+
+
+
   if(loading){
     return(
       <div className="filme-info">
@@ -68,13 +91,13 @@ function Filme(){
               alt={filme.title}></img>
       <h3>Sinopse</h3>
       <span>{filme.overview}</span>
-      <strong>Avaliacao: {filme.vote_average} / 10 </strong>
+      <strong>Avaliação: {filme.vote_average} / 10 </strong>
 
 
       <div className="area-buttons">
-      <button>Salvar</button>
+      <button onClick={salvarFilme}>Salvar</button>
       <button>
-        <a target="_blank" rel="external noreferrer" href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
+        <a target="blank" rel="external noreferrer" href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
           Trailer
         </a>
       </button>
