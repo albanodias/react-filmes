@@ -57,9 +57,7 @@ function Filme(){
 
   function salvarFilme() {
     const minhaLista = localStorage.getItem("@primeflix");
-
     let filmesSalvos = minhaLista !== null ? JSON.parse(minhaLista) : [];
-
     const hasFilme = filmesSalvos.some((filmeSalvo: any) => filmeSalvo.id === filme.id)
 
     if(hasFilme){
