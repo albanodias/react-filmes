@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './style.css'
 
 
@@ -18,6 +19,7 @@ function excluirFilme(id: any) {
 
   setFilmes(filtroFilmes);
   localStorage.setItem("@primeflix", JSON.stringify(filtroFilmes));
+  toast.success("Filme removido com sucesso!");
 }
 
   return(
